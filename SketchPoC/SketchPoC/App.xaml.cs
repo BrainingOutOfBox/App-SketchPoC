@@ -1,5 +1,6 @@
 ﻿using Prism;
 using Prism.Ioc;
+using SketchPoC.BLServices;
 using SketchPoC.ViewModels;
 using SketchPoC.Views;
 using Xamarin.Forms;
@@ -30,7 +31,9 @@ namespace SketchPoC
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<SketchPage, SketchPageViewModel>();
+            containerRegistry.RegisterForNavigation<SketchPage>();
+
+            containerRegistry.Register<ISaveService, SketchSaveService>();
         }
     }
 }

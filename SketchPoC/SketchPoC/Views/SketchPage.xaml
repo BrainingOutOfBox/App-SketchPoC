@@ -4,6 +4,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              xmlns:beh="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:tt="clr-namespace:SketchPoC.Sketching.TouchEffect"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SketchPoC.Views.SketchPage">
 
@@ -15,7 +16,6 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -62,13 +62,9 @@
                 Grid.Row="0"
                 Grid.Column="2"
                 HorizontalOptions="Center"
-                VerticalOptions="Center" />
+                VerticalOptions="Center"
+                Clicked="OnClearButtonClicked" />
 
-        <Button Text="Save Image"
-        Grid.Row="0"
-        Grid.Column="3"
-        HorizontalOptions="End"
-        VerticalOptions="Center"/>
 
 
         <!-- Enclose SKCanvasView in single-cell Grid. 
@@ -76,19 +72,15 @@
 
         <Grid Grid.Row="1"
               Grid.Column="0"
-              Grid.ColumnSpan="4"
+              Grid.ColumnSpan="3"
               BackgroundColor="White">
 
-            <skia:SKCanvasView x:Name="canvasView" >
-                <skia:SKCanvasView.Behaviors>
-                    <beh:EventToCommandBehavior EventName="PaintSurface" Command="{Binding PainSurfaceCommand}" EventArgsParameterPath="Surface" />
-                </skia:SKCanvasView.Behaviors>
-            </skia:SKCanvasView>
-            <!--
+            <skia:SKCanvasView x:Name="canvasView"
+                               PaintSurface="OnCanvasViewPaintSurface" />
             <Grid.Effects>
                 <tt:TouchEffect Capture="True"
                                 TouchAction="OnTouchEffectAction" />
-            </Grid.Effects>-->
+            </Grid.Effects>
         </Grid>
     </Grid>
 </ContentPage>
