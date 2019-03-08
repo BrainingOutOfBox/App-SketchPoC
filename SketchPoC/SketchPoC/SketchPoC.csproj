@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SketchPoC.Dal\SketchPoC.Dal.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Views\SketchPage.xaml.cs">
       <DependentUpon>SketchPage.xaml</DependentUpon>
     </Compile>

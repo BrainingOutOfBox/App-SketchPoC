@@ -5,6 +5,7 @@ using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using Xamarin.Forms;
 
@@ -118,5 +119,27 @@ namespace SketchPoC.Views
             return (float)(canvasView.CanvasSize.Width * fl / canvasView.Width);
         }
 
+        private void Save_Clicked(object sender, EventArgs e)
+        {
+            var info = new SKImageInfo((int)canvasView.CanvasSize.Width, (int)canvasView.CanvasSize.Height);
+            var surface = SKSurface.Create(info);
+            var canvas = surface.Canvas;
+            canvas.Clear();
+
+            foreach (FingerPaintPolyline polyline in completedPolylines)
+                canvas.DrawPath(polyline.Path, paint);
+
+            foreach (FingerPaintPolyline polyline in inProgressPolylines.Values)
+                canvas.DrawPath(polyline.Path, paint);
+
+            canvas.Flush();
+
+            var snap = surface.Snapshot();
+
+            using (var data = snap.Encode(SKEncodedImageFormat.Png, 80))
+            {
+                _saveService.Save(data.AsStream());
+            }
+        }
     }
 }
