@@ -1,9 +1,11 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 
 namespace SketchPoC.Dal
 {
     public interface IDalService
     {
-        void Save(Stream stream);
+        string Save(Stream stream);
+        Task<Stream> Download(string fileId);
     }
 }

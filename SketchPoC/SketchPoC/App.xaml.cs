@@ -30,12 +30,15 @@ namespace SketchPoC
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<ISaveService, SketchSaveService>();
+            containerRegistry.Register<IDalService, RestDalService>();
+
+
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<SketchDownloadPage, SketchDownloadPageViewModel>();
             containerRegistry.RegisterForNavigation<SketchPage>();
 
-            containerRegistry.Register<ISaveService, SketchSaveService>();
-            containerRegistry.Register<IDalService, RestDalService>();
 
         }
     }

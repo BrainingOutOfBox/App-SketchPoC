@@ -1,11 +1,11 @@
-﻿using SketchPoC.BLServices;
+﻿using Prism.Navigation;
+using SketchPoC.BLServices;
 using SketchPoC.Sketching;
 using SketchPoC.Sketching.TouchEffect;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using Xamarin.Forms;
 
@@ -13,10 +13,11 @@ namespace SketchPoC.Views
 {
     public partial class SketchPage : ContentPage
     {
-        public SketchPage(ISaveService saveService)
+        public SketchPage(ISaveService saveService, INavigationService navigationService)
         {
             InitializeComponent();
             _saveService = saveService;
+            _navigationService = navigationService;
         }
         Dictionary<long, FingerPaintPolyline> inProgressPolylines = new Dictionary<long, FingerPaintPolyline>();
         List<FingerPaintPolyline> completedPolylines = new List<FingerPaintPolyline>();
@@ -28,6 +29,7 @@ namespace SketchPoC.Views
             StrokeJoin = SKStrokeJoin.Round
         };
         private readonly ISaveService _saveService;
+        private readonly INavigationService _navigationService;
 
         void OnClearButtonClicked(object sender, EventArgs args)
         {
@@ -140,6 +142,11 @@ namespace SketchPoC.Views
             {
                 _saveService.Save(data.AsStream());
             }
+        }
+
+        private async void ViewUploadedImage_Clicked(object sender, EventArgs e)
+        {
+            await _navigationService.NavigateAsync("app:///NavigationPage/SketchDownloadPage");
         }
     }
 }

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:local="clr-namespace:SketchPoC.Views"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ext="clr-namespace:SketchPoC.Views.Extensions"
+             x:Class="SketchPoC.Views.SketchDownloadPage">
+    <ContentPage.Resources>
+        <local:InvertBooleanConverter x:Key="InvertBoolean" />
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="{Binding DownloadedImageSource}" Grid.Row="0" Grid.Column="0" IsVisible="{Binding HasDownloadFinished}" />
+        <Image Source="{ext:ImageResource SketchPoC.Resources.img.waiting.gif}" Grid.Row="0" Grid.Column="0" IsVisible="{Binding HasDownloadFinished, Converter={StaticResource InvertBoolean}}" />
+    </Grid>
+</ContentPage>

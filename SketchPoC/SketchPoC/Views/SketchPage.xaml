@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -82,5 +83,6 @@
                                 TouchAction="OnTouchEffectAction" />
             </Grid.Effects>
         </Grid>
+        <Button Text="View Uploaded Image" Clicked="ViewUploadedImage_Clicked" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" />
     </Grid>
 </ContentPage>
